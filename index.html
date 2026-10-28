@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boar Lanes — Bowling</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎳</text></svg>" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <div id="hud">
+      <div id="scoreboard"></div>
+      <div id="pin-diagram"></div>
+
+      <div id="help">
+        <h3>Controls <span class="kbd">H</span></h3>
+        <div><span class="kbd">W A S D</span> walk · <span class="kbd">Shift</span> run · mouse look</div>
+        <div><span class="kbd">E</span> pick up / put back ball</div>
+        <div><span class="kbd">Space</span> step up on the approach</div>
+        <div class="sep">On the approach</div>
+        <div><span class="kbd">A D</span> move across boards · <span class="kbd">W S</span> step</div>
+        <div><span class="kbd">Q E</span> / mouse — angle</div>
+        <div><span class="kbd">Space</span> / click — lock power, then spin</div>
+        <div><span class="kbd">Esc</span> / right-click — step back</div>
+        <div class="sep">Tips</div>
+        <div>The front 40 ft is oiled: the ball skids, then hooks on the dry back end.</div>
+        <div>Heavier reactive balls hook more. Over 90% power costs accuracy.</div>
+        <div>Don't let your slide cross the red foul line.</div>
+      </div>
+
+      <div id="prompt" class="hidden"></div>
+      <div id="message"></div>
+      <div id="throw-info" class="hidden"></div>
+
+      <div id="power-meter" class="hidden">
+        <div class="label">POWER</div>
+        <div class="track">
+          <div class="zone sweet"></div>
+          <div class="zone over"></div>
+          <div id="power-fill"></div>
+        </div>
+        <div id="power-value">0%</div>
+      </div>
+
+      <div id="spin-meter" class="hidden">
+        <div class="label">SPIN</div>
+        <div class="track">
+          <div class="tick" style="left: 50%"></div>
+          <div id="spin-needle"></div>
+        </div>
+        <div class="ends"><span>◄ hook left</span><span id="spin-value">0.00</span><span>hook right ►</span></div>
+      </div>
+
+      <div id="game-over" class="hidden">
+        <div class="card">
+          <div class="kicker">GAME COMPLETE</div>
+          <div id="final-score">0</div>
+          <button id="new-game">New game <span class="kbd">N</span></button>
+        </div>
+      </div>
+
+      <div id="start">
+        <div class="card">
+          <div class="logo">BOAR LANES</div>
+          <p>Grab a ball from the rack, walk up to <b>lane 3</b> and bowl a full ten-frame game.</p>
+          <button id="start-btn">Click to play</button>
+          <p class="small">WASD to move · mouse to look · H for controls</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

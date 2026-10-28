@@ -1,0 +1,6 @@
+apiVersion: v2
+name: boar
+description: Boar Lanes — 3D bowling game served as static files.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
