@@ -35,6 +35,8 @@ spec:
               port: http
           securityContext:
             runAsNonRoot: true
+            # The image's user is named, so the kubelet needs the UID to verify it.
+            runAsUser: 1000
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
           resources:
