@@ -7,6 +7,8 @@ export class Input {
   /** Primary action: left click while the pointer is locked. */
   clicked = false;
   rightClicked = false;
+  /** Left mouse button is held down (for automatic fire). */
+  mouseHeld = false;
 
   constructor(private element: HTMLElement) {
     window.addEventListener('keydown', (e) => {
@@ -15,7 +17,10 @@ export class Input {
       this.down.add(e.code);
     });
     window.addEventListener('keyup', (e) => this.down.delete(e.code));
-    window.addEventListener('blur', () => this.down.clear());
+    window.addEventListener('blur', () => {
+      this.down.clear();
+      this.mouseHeld = false;
+    });
     window.addEventListener('mousemove', (e) => {
       if (!this.locked) return;
       this.mouseDX += e.movementX;
@@ -26,8 +31,14 @@ export class Input {
         this.lock();
         return;
       }
-      if (e.button === 0) this.clicked = true;
+      if (e.button === 0) {
+        this.clicked = true;
+        this.mouseHeld = true;
+      }
       if (e.button === 2) this.rightClicked = true;
+    });
+    window.addEventListener('mouseup', (e) => {
+      if (e.button === 0) this.mouseHeld = false;
     });
     element.addEventListener('contextmenu', (e) => e.preventDefault());
   }

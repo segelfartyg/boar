@@ -310,3 +310,147 @@ html, body {
   background: linear-gradient(90deg, var(--pink), var(--gold));
   cursor: pointer;
 }
+
+/* ---------- Saboteurs & weapons ---------- */
+#roster {
+  position: absolute;
+  top: 150px;
+  right: 16px;
+  width: 270px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+#roster:empty { display: none; }
+#roster .title { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--cyan); margin-bottom: 4px; }
+#roster .row { display: grid; grid-template-columns: 62px 70px 1fr 54px; align-items: center; gap: 6px; padding: 2px 0; }
+#roster .row.ko { opacity: 0.45; }
+#roster .name { font-weight: 800; }
+#roster .badge { font-size: 9px; font-weight: 800; letter-spacing: 1px; padding: 1px 5px; border-radius: 4px; background: rgba(239, 68, 68, 0.25); color: #fca5a5; justify-self: start; }
+#roster .bowler .badge { background: rgba(34, 211, 238, 0.2); color: var(--cyan); }
+#roster .weapon { color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#roster .bar { height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+#roster .bar i { display: block; height: 100%; background: #4ade80; }
+#roster .bar.composure i { background: var(--cyan); }
+
+#feed {
+  position: absolute;
+  right: 16px;
+  bottom: 140px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+#feed .line {
+  background: rgba(14, 9, 36, 0.75);
+  border-left: 3px solid var(--pink);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: opacity 1s;
+}
+#feed .line.fade { opacity: 0; }
+#feed b { color: var(--gold); }
+
+#crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+#crosshair::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px;
+  border-radius: 50%;
+  background: var(--pink);
+}
+
+#weapon-hud {
+  position: absolute;
+  right: 16px;
+  bottom: 70px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  text-align: right;
+}
+#weapon-hud b { color: var(--gold); font-size: 18px; }
+#weapon-hud .sub { font-size: 11px; color: rgba(255, 255, 255, 0.6); }
+
+#composure {
+  position: absolute;
+  right: 16px;
+  bottom: 24px;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--cyan);
+}
+#composure .track { flex: 1; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.12); overflow: hidden; border: 1px solid var(--line); }
+#composure-fill { height: 100%; width: 100%; background: linear-gradient(90deg, var(--cyan), #a78bfa); transition: width 0.2s; }
+#composure.low #composure-fill { background: linear-gradient(90deg, #ef4444, #f97316); }
+#composure.shaking { animation: shake 0.12s infinite; }
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+}
+
+#fx-overlay { position: absolute; inset: 0; overflow: hidden; }
+.fx-hit {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(220, 20, 40, 0.75) 100%);
+  animation: fade-out 0.7s forwards;
+}
+.fx-cheese {
+  position: absolute;
+  border-radius: 46% 54% 42% 58% / 55% 40% 60% 45%;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(150, 100, 0, 0.55) 0 7%, transparent 8%),
+    radial-gradient(circle at 65% 60%, rgba(150, 100, 0, 0.5) 0 9%, transparent 10%),
+    radial-gradient(circle at 45% 75%, rgba(150, 100, 0, 0.45) 0 5%, transparent 6%),
+    radial-gradient(circle at 50% 50%, #ffd34d 0 55%, #ffb800 70%, rgba(255, 184, 0, 0) 72%);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
+  animation: cheese-drip 4.6s forwards;
+}
+@keyframes cheese-drip {
+  0% { opacity: 0; scale: 0.4; }
+  6% { opacity: 1; scale: 1.05; }
+  70% { opacity: 0.95; translate: 0 30px; }
+  100% { opacity: 0; translate: 0 70px; }
+}
+.fx-confetti {
+  position: absolute;
+  width: 12px;
+  height: 7px;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes confetti-fall {
+  from { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  to { transform: translate(var(--drift), 110vh) rotate(var(--spin)); opacity: 0.8; }
+}
+@keyframes fade-out { to { opacity: 0; } }
